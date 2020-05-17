@@ -20,7 +20,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
             {
                 ClientId = model.ClientId,
                 DateCreate = DateTime.Now,
-                FillSum = model.Sum,
+                OrderSum = model.Sum,
                 OrderDishes = model.OrderDishes,
                 Status = OrderStatus.Принят
             });
@@ -38,7 +38,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                 Id = order.Id,
                 ClientId = order.ClientId,
                 OrderDishes = order.OrderDishes,
-                FillSum = order.Sum,
+                OrderSum = order.OrderSum,
                 Status = OrderStatus.Выполняется
             });
         }
@@ -55,7 +55,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                 Id = order.Id,
                 ClientId = order.ClientId,
                 OrderDishes = order.OrderDishes,
-                FillSum = order.Sum,
+                OrderSum = order.OrderSum,
                 Status = OrderStatus.Готов
             });
         }
@@ -72,7 +72,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                 Id = order.Id,
                 ClientId = order.ClientId,
                 OrderDishes = order.OrderDishes,
-                FillSum = order.Sum,
+                OrderSum = order.OrderSum,
                 Status = OrderStatus.Оплачен
             });
         }

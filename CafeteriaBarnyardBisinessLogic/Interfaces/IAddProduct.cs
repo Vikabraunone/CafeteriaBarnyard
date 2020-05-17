@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace CafeteriaBarnyardBisinessLogic.Interfaces
 {
-    public interface IOrderLogic
+    public interface IAddProduct
     {
-        List<OrderViewModel> Read(OrderBindingModel model);
+        List<AddProductViewModel> Read(AddProductBindingModel model);
 
-        void CreateOrUpdate(OrderBindingModel model);
+        void Create(AddProductBindingModel model);
     }
 }

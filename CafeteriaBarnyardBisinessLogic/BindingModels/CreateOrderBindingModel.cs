@@ -8,6 +8,7 @@ namespace CafeteriaBarnyardBisinessLogic.BindingModels
 
         public decimal Sum { get; set; }
 
-        public Dictionary<int, (int, double)> OrderDishes { get; set; }
+        // Id блюда, название, сумма
+        public Dictionary<int, (string, decimal)> OrderDishes { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace CafeteriaBarnyardView
                     if (view != null)
                     {
                         textBoxName.Text = view.DishName;
-                        textBoxPrice.Text = view.FillPrice.ToString();
+                        textBoxPrice.Text = view.Price.ToString();
                         dishProducts = view.DishProducts;
                         comboBoxTypeDish.DataSource = Enum.GetValues(typeof(DishType))
                             .Cast<DishType>()
@@ -103,9 +103,9 @@ namespace CafeteriaBarnyardView
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (dishProducts.ContainsKey(form.Id))
-                    dishProducts[form.Id] = (form.ProductName, form.Weight);
+                    dishProducts[form.Id] = (form.NameProduct, form.Weight);
                 else
-                    dishProducts.Add(form.Id, (form.ProductName, form.Weight));
+                    dishProducts.Add(form.Id, (form.NameProduct, form.Weight));
                 LoadData();
             }
             else
@@ -122,7 +122,7 @@ namespace CafeteriaBarnyardView
                 form.Weight = dishProducts[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    dishProducts[form.Id] = (form.ProductName, form.Weight);
+                    dishProducts[form.Id] = (form.NameProduct, form.Weight);
                     LoadData();
                 }
             }
@@ -186,7 +186,7 @@ namespace CafeteriaBarnyardView
                 dLogic.CreateOrUpdate(new DishBindingModel
                 {
                     Id = id,
-                    Name = textBoxName.Text,
+                    DishName = textBoxName.Text,
                     DishProducts = dishProducts,
                     Price = Convert.ToDecimal(textBoxPrice.Text),
                     DishType = (DishType)Enum.Parse(typeof(DishType), comboBoxTypeDish.SelectedItem.ToString())

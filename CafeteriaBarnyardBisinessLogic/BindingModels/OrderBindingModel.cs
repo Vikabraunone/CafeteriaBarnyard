@@ -10,13 +10,16 @@ namespace CafeteriaBarnyardBisinessLogic.BindingModels
 
         public int? ClientId { get; set; }
 
-        public decimal FillSum { get; set; }
+        // Сумма заказа
+        public decimal OrderSum { get; set; }
 
         public DateTime DateCreate { get; set; }
 
+        public DateTime? DateImplement { get; set; }
+
         public OrderStatus Status { get; set; }
 
-        // Id блюда - сумма
-        public Dictionary<int, (int, double)> OrderDishes { get; set; }
+        // Id блюда, название, сумма
+        public Dictionary<int, (string, decimal)> OrderDishes { get; set; }
     }
 }

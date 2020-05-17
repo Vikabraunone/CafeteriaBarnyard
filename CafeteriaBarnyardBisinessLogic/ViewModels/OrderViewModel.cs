@@ -15,10 +15,10 @@ namespace CafeteriaBarnyardBisinessLogic.ViewModels
         public DateTime DateCreate { get; set; }
 
         [DisplayName("Блюдо")]
-        public Dictionary<int, (int, double)> OrderDishes { get; set; }
+        public Dictionary<int, (string, decimal)> OrderDishes { get; set; }
 
         [DisplayName("Сумма")]
-        public decimal Sum { get; set; }
+        public decimal OrderSum { get; set; }
 
         public OrderStatus Status { get; set; }
     }

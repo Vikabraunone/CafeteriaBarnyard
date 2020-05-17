@@ -12,7 +12,7 @@ namespace CafeteriaBarnyardBisinessLogic.ViewModels
         public string DishName { get; set; }
 
         [DisplayName("Цена блюда")]
-        public decimal FillPrice { get; set; }
+        public decimal Price { get; set; }
 
         [DisplayName("Тип блюда")]
         public DishType DishType { get; set; }

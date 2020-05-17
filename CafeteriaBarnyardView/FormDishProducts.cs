@@ -18,7 +18,7 @@ namespace CafeteriaBarnyardView
             set { comboBoxProduct.SelectedValue = value; }
         }
 
-        public string ProductName { get { return comboBoxProduct.Text; } }
+        public string NameProduct { get { return comboBoxProduct.Text; } }
 
         public double Weight
         {
