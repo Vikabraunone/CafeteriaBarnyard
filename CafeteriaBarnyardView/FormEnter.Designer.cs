@@ -100,6 +100,7 @@
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.labelEmail);
             this.Name = "FormEnter";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Вход";
             this.ResumeLayout(false);
             this.PerformLayout();

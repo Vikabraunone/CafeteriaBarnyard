@@ -32,13 +32,15 @@ namespace CafeteriaBarnyardView
             this.dLogic = dLogic;
             this.pLogic = pLogic;
             dataGridView.Columns.Add("Id", "Id");
-            dataGridView.Columns.Add("ProductName", "Продукт");
-            dataGridView.Columns.Add("Weight", "Количество");
-            dataGridView.Columns.Add("Price", "Цена продукта");
+            dataGridView.Columns.Add("DishName", "Название продукта");
+            dataGridView.Columns.Add("ProductName", "Количество");
             dataGridView.Columns[0].Visible = false;
-            dataGridView.Columns[1].Width = 100;
-            dataGridView.Columns[2].Width = 80;
-            dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns[1].Width = 150;
+            dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            comboBoxTypeDish.DataSource = Enum.GetValues(typeof(DishType))
+                            .Cast<DishType>()
+                            .Select(x => x.ToString())
+                            .ToList();
         }
 
         private void FormDish_Load(object sender, EventArgs e)
@@ -53,11 +55,7 @@ namespace CafeteriaBarnyardView
                         textBoxName.Text = view.DishName;
                         textBoxPrice.Text = view.Price.ToString();
                         dishProducts = view.DishProducts;
-                        comboBoxTypeDish.DataSource = Enum.GetValues(typeof(DishType))
-                            .Cast<DishType>()
-                            .Select(x => x.ToString())
-                            .ToList();
-                        comboBoxTypeDish.SelectedItem = null;
+                        comboBoxTypeDish.SelectedIndex = (int)view.DishType;
                         LoadData();
                     }
                 }
@@ -67,14 +65,17 @@ namespace CafeteriaBarnyardView
                 }
             }
             else
+            {
                 dishProducts = new Dictionary<int, (string, double)>();
+                comboBoxTypeDish.SelectedItem = null;
+            }
         }
 
         private void CalcSum()
         {
-            decimal price = 0;
+            double price = 0;
             foreach (var e in dishProducts)
-                price += pLogic.Read(new ProductBindingModel { ProductName = e.Value.Item1 })[0].Price;
+                price += Convert.ToDouble(pLogic.Read(new ProductBindingModel { ProductName = e.Value.Item1 })[0].Price) * e.Value.Item2;
             textBoxResult.Text = price.ToString();
         }
 
@@ -89,7 +90,6 @@ namespace CafeteriaBarnyardView
                         dataGridView.Rows.Add(new object[] { dp.Key, dp.Value.Item1, dp.Value.Item2 });
                     CalcSum();
                 }
-
             }
             catch (Exception ex)
             {
@@ -166,7 +166,7 @@ namespace CafeteriaBarnyardView
             }
             if (!double.TryParse(textBoxPrice.Text, out double weight))
             {
-                MessageBox.Show("Неккоректно введен вес", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Неккоректно введена цена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (dishProducts == null || dishProducts.Count == 0)
@@ -182,7 +182,6 @@ namespace CafeteriaBarnyardView
             }
             try
             {
-                // ПРОВЕРИТЬ!!
                 dLogic.CreateOrUpdate(new DishBindingModel
                 {
                     Id = id,

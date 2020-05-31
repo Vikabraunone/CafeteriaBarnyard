@@ -100,6 +100,7 @@
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.labelName);
             this.Name = "FormProduct";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Продукт";
             this.Load += new System.EventHandler(this.FormProduct_Load);
             this.ResumeLayout(false);

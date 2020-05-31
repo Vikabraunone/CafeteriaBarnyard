@@ -17,16 +17,28 @@ namespace CafeteriaBarnyardView
 
         private readonly IOrderLogic orderLogic;
 
-        /// <summary>
-        /// ???????
-        /// </summary>
-        /// <param name="logic"></param>
-        /// <param name="orderLogic"></param>
         public FormOrders(HelpOrderLogic logic, IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
+            dataGridView.Columns.Add("Id", "Id");
+            dataGridView.Columns.Add("ClientId", "Id клиента");
+            dataGridView.Columns.Add("ClientFIO", "Клиент");
+            dataGridView.Columns.Add("DateCreate", "Дата создания");
+            dataGridView.Columns.Add("Dish", "Блюдо");
+            dataGridView.Columns.Add("DishPrice", "Цена блюда");
+            dataGridView.Columns.Add("Status", "Статус");
+            dataGridView.Columns.Add("OrderSum", "Сумма заказа");
+
+            dataGridView.Columns[0].Visible = false;
+            dataGridView.Columns[1].Visible = false;
+            dataGridView.Columns[2].Width = 200;
+            dataGridView.Columns[3].Width = 150;
+            dataGridView.Columns[4].Width = 150;
+            dataGridView.Columns[5].Width = 100;
+            dataGridView.Columns[6].Width = 100;
+            dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void FormOrders_Load(object sender, EventArgs e)
@@ -38,18 +50,18 @@ namespace CafeteriaBarnyardView
         {
             try
             {
-                var list = orderLogic.Read(null);
-                if (list != null)
+                dataGridView.Rows.Clear();
+                var orderList = orderLogic.Read(null);
+                if (orderList != null)
                 {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Width = 90;
-                    dataGridView.Columns[3].Width = 80;
-                    dataGridView.Columns[4].Width = 50;
-                    dataGridView.Columns[5].Width = 90;
-                    dataGridView.Columns[6].Width = 110;
-                    dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    foreach (var order in orderList)
+                    {
+                        foreach (var dish in order.OrderDishes)
+                        {
+                            dataGridView.Rows.Add(new object[]  { order.Id, order.ClientId, order.ClientFIO, order.DateCreate,
+                                dish.Value.Item1, dish.Value.Item2, order.Status, order.OrderSum });
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -58,9 +70,22 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                logic.CreateOrder(new CreateOrderBindingModel { ClientId = Program.Client.Id });
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonTakeOrderInWork_Click(object sender, EventArgs e)

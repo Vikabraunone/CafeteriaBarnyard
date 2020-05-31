@@ -15,7 +15,7 @@ namespace CafeteriaBarnyardDatabaseImplement.Models
 
         public DateTime DateRequest { get; set; }
 
-        [ForeignKey("ProductId")]
-        public virtual List<DishProduct> DishProducts { get; set; }
+        [ForeignKey("RequestId")]
+        public virtual List<RequestProduct> RequestProducts { get; set; }
     }
 }

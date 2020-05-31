@@ -101,6 +101,7 @@
             this.Controls.Add(this.labelWeight);
             this.Controls.Add(this.labelProduct);
             this.Name = "FormDishProducts";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Продукт блюда";
             this.ResumeLayout(false);
             this.PerformLayout();

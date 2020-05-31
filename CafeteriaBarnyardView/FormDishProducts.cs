@@ -52,6 +52,11 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Заполните поле количество", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (!double.TryParse(textBoxCount.Text, out double res))
+            {
+                MessageBox.Show("Неверный формат данных", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             DialogResult = DialogResult.OK;
             Close();
         }

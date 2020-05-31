@@ -35,7 +35,7 @@ namespace CafeteriaBarnyardView
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Width = 200;
                     dataGridView.Columns[2].Width = 80;
-                    dataGridView.Columns[3].Width = 80;
+                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridView.Columns[4].Visible = false;
                 }
             }

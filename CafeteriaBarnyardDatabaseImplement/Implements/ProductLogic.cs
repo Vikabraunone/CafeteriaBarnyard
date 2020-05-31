@@ -55,16 +55,17 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
         {
             using (var context = new AbstractSweetShopDatabase())
             {
-                return context.Products
-                .Where(rec => model == null || rec.Id == model.Id)
-                .Select(rec => new ProductViewModel
-                {
-                    Id = rec.Id,
-                    ProductName = rec.ProductName,
-                    FillWeight = rec.FillWeight,
-                    Price = rec.Price
-                })
-                .ToList();
+                var list = context.Products
+                 .Where(rec => model == null || rec.Id == model.Id || rec.ProductName.Equals(model.ProductName))
+                 .Select(rec => new ProductViewModel
+                 {
+                     Id = rec.Id,
+                     ProductName = rec.ProductName,
+                     FillWeight = rec.FillWeight,
+                     Price = rec.Price
+                 })
+                 .ToList();
+                return list;
             }
         }
     }

@@ -44,7 +44,8 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(634, 164);
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAdd.Location = new System.Drawing.Point(499, 166);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(177, 25);
             this.buttonAdd.TabIndex = 1;
@@ -54,7 +55,8 @@
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(634, 195);
+            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonUpdate.Location = new System.Drawing.Point(499, 197);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(177, 25);
             this.buttonUpdate.TabIndex = 3;
@@ -64,7 +66,8 @@
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(634, 226);
+            this.buttonRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRef.Location = new System.Drawing.Point(499, 228);
             this.buttonRef.Name = "buttonRef";
             this.buttonRef.Size = new System.Drawing.Size(177, 25);
             this.buttonRef.TabIndex = 4;
@@ -74,7 +77,8 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(634, 257);
+            this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDelete.Location = new System.Drawing.Point(499, 259);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(177, 25);
             this.buttonDelete.TabIndex = 5;
@@ -88,7 +92,7 @@
             this.отчетыToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(828, 24);
+            this.menuStrip.Size = new System.Drawing.Size(686, 24);
             this.menuStrip.TabIndex = 6;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -100,7 +104,8 @@
             // 
             // buttonDishes
             // 
-            this.buttonDishes.Location = new System.Drawing.Point(634, 37);
+            this.buttonDishes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDishes.Location = new System.Drawing.Point(499, 39);
             this.buttonDishes.Name = "buttonDishes";
             this.buttonDishes.Size = new System.Drawing.Size(177, 46);
             this.buttonDishes.TabIndex = 7;
@@ -110,7 +115,8 @@
             // 
             // buttonOrders
             // 
-            this.buttonOrders.Location = new System.Drawing.Point(634, 89);
+            this.buttonOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOrders.Location = new System.Drawing.Point(499, 91);
             this.buttonOrders.Name = "buttonOrders";
             this.buttonOrders.Size = new System.Drawing.Size(177, 42);
             this.buttonOrders.TabIndex = 8;
@@ -120,9 +126,10 @@
             // 
             // labelCRUD
             // 
+            this.labelCRUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCRUD.AutoSize = true;
             this.labelCRUD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCRUD.Location = new System.Drawing.Point(649, 144);
+            this.labelCRUD.Location = new System.Drawing.Point(514, 146);
             this.labelCRUD.Name = "labelCRUD";
             this.labelCRUD.Size = new System.Drawing.Size(153, 17);
             this.labelCRUD.TabIndex = 9;
@@ -132,18 +139,21 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(12, 37);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(606, 245);
+            this.dataGridView.Size = new System.Drawing.Size(470, 245);
             this.dataGridView.TabIndex = 0;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 306);
+            this.ClientSize = new System.Drawing.Size(686, 300);
             this.Controls.Add(this.labelCRUD);
             this.Controls.Add(this.buttonOrders);
             this.Controls.Add(this.buttonDishes);
@@ -155,6 +165,7 @@
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Столовая \"Рога и копыта\". Учет продуктов";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);

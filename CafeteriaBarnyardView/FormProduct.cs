@@ -51,7 +51,7 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Заполните название", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!int.TryParse(textBoxPrice.Text, out int price))
+            if (!decimal.TryParse(textBoxPrice.Text, out decimal price))
             {
                 MessageBox.Show("Неккоректно введена цена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

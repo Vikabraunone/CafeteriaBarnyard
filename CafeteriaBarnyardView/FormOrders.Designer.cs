@@ -40,9 +40,9 @@
             // buttonOrderRef
             // 
             this.buttonOrderRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOrderRef.Location = new System.Drawing.Point(605, 174);
+            this.buttonOrderRef.Location = new System.Drawing.Point(875, 245);
             this.buttonOrderRef.Name = "buttonOrderRef";
-            this.buttonOrderRef.Size = new System.Drawing.Size(140, 20);
+            this.buttonOrderRef.Size = new System.Drawing.Size(140, 37);
             this.buttonOrderRef.TabIndex = 12;
             this.buttonOrderRef.Text = "Обновить список";
             this.buttonOrderRef.UseVisualStyleBackColor = true;
@@ -51,9 +51,9 @@
             // buttonOrderReady
             // 
             this.buttonOrderReady.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOrderReady.Location = new System.Drawing.Point(605, 96);
+            this.buttonOrderReady.Location = new System.Drawing.Point(875, 130);
             this.buttonOrderReady.Name = "buttonOrderReady";
-            this.buttonOrderReady.Size = new System.Drawing.Size(140, 20);
+            this.buttonOrderReady.Size = new System.Drawing.Size(140, 37);
             this.buttonOrderReady.TabIndex = 10;
             this.buttonOrderReady.Text = "Заказ готов";
             this.buttonOrderReady.UseVisualStyleBackColor = true;
@@ -62,9 +62,9 @@
             // buttonTakeOrderInWork
             // 
             this.buttonTakeOrderInWork.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(605, 60);
+            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(875, 78);
             this.buttonTakeOrderInWork.Name = "buttonTakeOrderInWork";
-            this.buttonTakeOrderInWork.Size = new System.Drawing.Size(140, 20);
+            this.buttonTakeOrderInWork.Size = new System.Drawing.Size(140, 37);
             this.buttonTakeOrderInWork.TabIndex = 9;
             this.buttonTakeOrderInWork.Text = "Отдать на выполнение";
             this.buttonTakeOrderInWork.UseVisualStyleBackColor = true;
@@ -73,9 +73,9 @@
             // CreateOrder
             // 
             this.CreateOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreateOrder.Location = new System.Drawing.Point(605, 25);
+            this.CreateOrder.Location = new System.Drawing.Point(875, 22);
             this.CreateOrder.Name = "CreateOrder";
-            this.CreateOrder.Size = new System.Drawing.Size(140, 20);
+            this.CreateOrder.Size = new System.Drawing.Size(140, 37);
             this.CreateOrder.TabIndex = 8;
             this.CreateOrder.Text = "Сформировать заказ";
             this.CreateOrder.UseVisualStyleBackColor = true;
@@ -89,15 +89,15 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(579, 194);
+            this.dataGridView.Size = new System.Drawing.Size(850, 279);
             this.dataGridView.TabIndex = 7;
             // 
             // buttonPayOrder
             // 
             this.buttonPayOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPayOrder.Location = new System.Drawing.Point(605, 135);
+            this.buttonPayOrder.Location = new System.Drawing.Point(875, 188);
             this.buttonPayOrder.Name = "buttonPayOrder";
-            this.buttonPayOrder.Size = new System.Drawing.Size(140, 20);
+            this.buttonPayOrder.Size = new System.Drawing.Size(140, 37);
             this.buttonPayOrder.TabIndex = 11;
             this.buttonPayOrder.Text = "Заказ оплачен";
             this.buttonPayOrder.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(757, 212);
+            this.ClientSize = new System.Drawing.Size(1027, 303);
             this.Controls.Add(this.buttonOrderRef);
             this.Controls.Add(this.buttonPayOrder);
             this.Controls.Add(this.buttonOrderReady);
@@ -115,6 +115,7 @@
             this.Controls.Add(this.CreateOrder);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormOrders";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Заказы";
             this.Load += new System.EventHandler(this.FormOrders_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
