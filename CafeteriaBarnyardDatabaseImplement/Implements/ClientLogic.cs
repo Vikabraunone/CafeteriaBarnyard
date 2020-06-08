@@ -16,17 +16,18 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
             {
                 Client element = context.Clients.FirstOrDefault(rec => rec.Email == model.Email && rec.Id != model.Id);
                 if (element != null)
-                    throw new Exception("Уже есть клиент с таким логином!");
+                    throw new Exception("Уже есть сотрудник с таким логином!");
                 if (model.Id.HasValue)
                 {
                     element = context.Clients.FirstOrDefault(rec => rec.Id == model.Id);
                     if (element == null)
-                        throw new Exception("Клиент не найден");
+                        throw new Exception("Сотрудник не найден");
                 }
                 else
                 {
                     element = new Client();
                     context.Clients.Add(element);
+                    element.IsAdmin = false;
                 }
                 element.ClientFIO = model.ClientFIO;
                 element.Email = model.Email;
@@ -50,12 +51,24 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
             }
         }
 
+        public bool IsAdmin(ClientBindingModel model)
+        {
+            using (var context = new AbstractSweetShopDatabase())
+            {
+                Client element = context.Clients.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element != null)
+                    return element.IsAdmin;
+                else
+                    throw new Exception("Сотрудник не найден");
+            }
+        }
+
         public List<ClientViewModel> Read(ClientBindingModel model)
         {
             using (var context = new AbstractSweetShopDatabase())
             {
                 return context.Clients
-                .Where(rec => model == null || rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password))
+                .Where(rec => model == null || rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password) || model.Id == rec.Id)
                 .Select(rec => new ClientViewModel
                 {
                     Id = rec.Id,

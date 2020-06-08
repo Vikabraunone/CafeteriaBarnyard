@@ -3,33 +3,57 @@ using CafeteriaBarnyardBisinessLogic.Interfaces;
 using CafeteriaBarnyardBisinessLogic.ViewModels;
 using CafeteriaBarnyardDatabaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CafeteriaBarnyardDatabaseImplement.Implements
 {
-    public class RequestLogic : IRequest
+    public class RequestLogic : IRequestLogic
     {
-        public void Create(RequestBindingModel model)
+        public bool Create(RequestBindingModel model)
         {
             using (var context = new AbstractSweetShopDatabase())
             {
-                Request request = new Request
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    ClientId = model.ClientId,
-                    DateRequest = model.DateRequest
-                };
-                context.Requests.Add(request);
-                foreach (var rp in model.RequestProducts)
-                {
-                    context.RequestProducts.Add(new RequestProduct
+                    try
                     {
-                        RequestId = request.Id.Value,
-                        ProductId = rp.Key,
-                        Weight = rp.Value.Item2
-                    });
+                        Request request = new Request
+                        {
+                            ClientId = model.ClientId,
+                            DateRequest = model.DateRequest
+                        };
+                        context.Requests.Add(request);
+                        context.SaveChanges();
+                        Product product;
+                        foreach (var rp in model.RequestProducts)
+                        {
+                            product = context.Products.First(rec => rec.Id == rp.Key);
+                            if (product.FillWeight <= rp.Value.Item2)
+                            {
+                                transaction.Rollback();
+                                return false;
+                            }
+                            product.FillWeight -= rp.Value.Item2;
+                            context.RequestProducts.Add(new RequestProduct
+                            {
+                                RequestId = request.Id.Value,
+                                ProductId = rp.Key,
+                                Weight = rp.Value.Item2
+                            });
+                            context.SaveChanges();
+                        }
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
-                context.SaveChanges();
+
             }
         }
 

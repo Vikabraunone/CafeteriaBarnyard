@@ -26,6 +26,8 @@ namespace CafeteriaBarnyardDatabaseImplement.Models
 
         public OrderStatus Status { get; set; }
 
+        public virtual Client Client { get; set; }
+
         [ForeignKey("OrderId")]
         public virtual List<OrderDish> OrderDishes { get; set; }
     }

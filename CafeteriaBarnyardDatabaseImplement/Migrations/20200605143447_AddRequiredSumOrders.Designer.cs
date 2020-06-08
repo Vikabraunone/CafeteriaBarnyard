@@ -4,14 +4,16 @@ using CafeteriaBarnyardDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CafeteriaBarnyardDatabaseImplement.Migrations
 {
     [DbContext(typeof(AbstractSweetShopDatabase))]
-    partial class AbstractSweetShopDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20200605143447_AddRequiredSumOrders")]
+    partial class AddRequiredSumOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +42,18 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
                     b.ToTable("AddProducts");
                 });
 
+            modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.Client", b =>
                 {
                     b.Property<int>("Id")
@@ -52,9 +66,6 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -245,7 +256,7 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
 
             modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.Order", b =>
                 {
-                    b.HasOne("CafeteriaBarnyardDatabaseImplement.Models.Client", "Client")
+                    b.HasOne("CafeteriaBarnyardDatabaseImplement.Models.Client", null)
                         .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)

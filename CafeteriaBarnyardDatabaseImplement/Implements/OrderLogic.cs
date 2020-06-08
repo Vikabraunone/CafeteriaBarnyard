@@ -27,8 +27,9 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
                                 ClientId = model.ClientId.Value,
                                 OrderSum = model.OrderSum,
                                 DateCreate = model.DateCreate,
-                                Status = order.Status
+                                Status = model.Status
                             };
+                            context.Orders.Add(order);
                             context.SaveChanges();
                             foreach (var od in model.OrderDishes)
                             {
@@ -69,14 +70,17 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
                     {
                         Id = rec.Id,
                         ClientId = rec.ClientId,
+                        ClientFIO = context.Orders
+                        .Include(recC => recC.Client)
+                        .Where(recC => recC.ClientId == rec.ClientId)
+                        .ToList()[0].Client.ClientFIO,
                         DateCreate = rec.DateCreate,
                         Status = rec.Status,
                         OrderSum = rec.OrderSum,
                         OrderDishes = context.OrderDishes
-                        .Include(recOP => recOP.DishId)
-                        .Where(recOP => recOP.OrderId == rec.Id)
-                        .ToDictionary(recOP => recOP.DishId, recOP =>
-                        (recOP.Dish?.DishName, recOP.DishPrice))
+                        .Include(recOD => recOD.Dish)
+                        .Where(recOD => recOD.OrderId == rec.Id)
+                        .ToDictionary(recOD => recOD.DishId, recOD => (recOD.Dish?.DishName, recOD.DishPrice))
                     })
                     .ToList();
             }

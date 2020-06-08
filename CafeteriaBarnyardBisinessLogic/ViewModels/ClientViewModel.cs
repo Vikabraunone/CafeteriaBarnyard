@@ -10,6 +10,8 @@ namespace CafeteriaBarnyardBisinessLogic.ViewModels
 
         public string Password { get; set; }
 
+        public bool IsAdmin { get; set; }
+
         [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
     }

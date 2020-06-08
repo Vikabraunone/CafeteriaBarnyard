@@ -1,4 +1,6 @@
-﻿namespace CafeteriaBarnyardDatabaseImplement.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CafeteriaBarnyardDatabaseImplement.Models
 {
     public class OrderDish
     {
@@ -8,6 +10,7 @@
 
         public int DishId { get; set; }
 
+        [Required]
         public decimal DishPrice { get; set; }
 
         public virtual Order Order { get; set; }

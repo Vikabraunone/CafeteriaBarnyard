@@ -11,12 +11,14 @@ namespace CafeteriaBarnyardView
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly IProductLogic logic;
+        private readonly IProductLogic productLogic;
 
-        public FormMain(IProductLogic logic)
+        public FormMain(IProductLogic productLogic, IClientLogic clientLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.productLogic = productLogic;
+            if (!clientLogic.IsAdmin(new ClientBindingModel { Id = Program.Client.Id }))
+                пополнитьToolStripMenuItem.Visible = false;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -28,7 +30,7 @@ namespace CafeteriaBarnyardView
         {
             try
             {
-                var list = logic.Read(null);
+                var list = productLogic.Read(null);
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -91,7 +93,7 @@ namespace CafeteriaBarnyardView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new ProductBindingModel { Id = id });
+                        productLogic.Delete(new ProductBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -102,6 +104,32 @@ namespace CafeteriaBarnyardView
             }
             else
                 MessageBox.Show("Выберите строку с продуктом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void заявкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormAddProduct>();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+            }
+        }
+
+        private void отчетыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void пополнитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormAddProduct>();
+            if (form.ShowDialog() == DialogResult.OK)
+                LoadData();
+        }
+
+        private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormRegister>();
+            form.ShowDialog();
         }
     }
 }

@@ -11,5 +11,7 @@ namespace CafeteriaBarnyardBisinessLogic.Interfaces
         void CreateOrUpdate(ClientBindingModel model);
 
         void Delete(ClientBindingModel model);
+
+        bool IsAdmin(ClientBindingModel model);
     }
 }

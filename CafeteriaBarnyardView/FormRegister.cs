@@ -1,5 +1,6 @@
 ﻿using CafeteriaBarnyardBisinessLogic.BindingModels;
 using CafeteriaBarnyardBisinessLogic.Interfaces;
+using CafeteriaBarnyardBisinessLogic.ViewModels;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -19,7 +20,18 @@ namespace CafeteriaBarnyardView
             this.logic = logic;
         }
 
-        private void buttonRegister_Click(object sender, EventArgs e)
+        private void FormRegister_Load(object sender, EventArgs e)
+        {
+            if (Program.Client != null)
+            {
+                ClientViewModel client = logic.Read(new ClientBindingModel { Id = Program.Client.Id })[0];
+                textBoxEmail.Text = client.Email;
+                textBoxPassword.Text = client.Password;
+                textBoxClientFIO.Text = client.ClientFIO;
+            }
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBoxEmail.Text) && !string.IsNullOrEmpty(textBoxPassword.Text) && !string.IsNullOrEmpty(textBoxClientFIO.Text))
             {

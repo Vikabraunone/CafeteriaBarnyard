@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CafeteriaBarnyardDatabaseImplement.Implements
 {
-    public class AddProductLogic : IAddProduct
+    public class AddProductLogic : IAddProductLogic
     {
         public void Create(AddProductBindingModel model)
         {

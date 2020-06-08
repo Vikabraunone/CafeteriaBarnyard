@@ -1,5 +1,4 @@
-﻿using CafeteriaBarnyardBisinessLogic.BusinessLogics;
-using CafeteriaBarnyardBisinessLogic.Interfaces;
+﻿using CafeteriaBarnyardBisinessLogic.Interfaces;
 using CafeteriaBarnyardBisinessLogic.ViewModels;
 using CafeteriaBarnyardDatabaseImplement.Implements;
 using System;
@@ -28,11 +27,11 @@ namespace CafeteriaBarnyardView
         {
             var currentContainer = new UnityContainer();
             currentContainer.RegisterType<IDishLogic, DishLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IOrderLogic, CafeteriaBarnyardDatabaseImplement.Implements.OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProductLogic, ProductLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IClientLogic, ClientLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IRequest, RequestLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<HelpOrderLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IRequestLogic, RequestLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<CafeteriaBarnyardBisinessLogic.BusinessLogics.OrderLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

@@ -43,6 +43,7 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
                             // удалили те, которых нет в модели
                             context.DishProducts.RemoveRange(dishProducts.Where(rec => !model.DishProducts.ContainsKey(rec.ProductId)).ToList());
                             context.SaveChanges();
+                            dishProducts = context.DishProducts.Where(rec => rec.DishId == model.Id.Value).ToList();
                             // обновили количество у существующих записей
                             foreach (var updateProduct in dishProducts)
                             {

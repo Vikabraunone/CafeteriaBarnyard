@@ -87,13 +87,13 @@
             // 
             // buttonRegister
             // 
-            this.buttonRegister.Location = new System.Drawing.Point(95, 133);
+            this.buttonRegister.Location = new System.Drawing.Point(105, 136);
             this.buttonRegister.Name = "buttonRegister";
-            this.buttonRegister.Size = new System.Drawing.Size(139, 35);
+            this.buttonRegister.Size = new System.Drawing.Size(129, 32);
             this.buttonRegister.TabIndex = 10;
-            this.buttonRegister.Text = "Регистрация";
+            this.buttonRegister.Text = "Сохранить";
             this.buttonRegister.UseVisualStyleBackColor = true;
-            this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
+            this.buttonRegister.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // FormRegister
             // 
@@ -108,10 +108,12 @@
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.labelEmail);
             this.Name = "FormRegister";
-            this.Text = "Регистрация";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Регистрация";
+            this.Load += new System.EventHandler(this.FormRegister_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.TextBox textBoxPassword;

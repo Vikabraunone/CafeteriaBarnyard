@@ -13,31 +13,31 @@ namespace CafeteriaBarnyardView
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly HelpOrderLogic logic;
+        private readonly OrderLogic logic;
 
         private readonly IOrderLogic orderLogic;
 
-        public FormOrders(HelpOrderLogic logic, IOrderLogic orderLogic)
+        public FormOrders(OrderLogic logic, IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
-            dataGridView.Columns.Add("Id", "Id");
+            dataGridView.Columns.Add("Id", "№ заказа");
             dataGridView.Columns.Add("ClientId", "Id клиента");
-            dataGridView.Columns.Add("ClientFIO", "Клиент");
+            dataGridView.Columns.Add("ClientFIO", "Сотрудник");
             dataGridView.Columns.Add("DateCreate", "Дата создания");
             dataGridView.Columns.Add("Dish", "Блюдо");
             dataGridView.Columns.Add("DishPrice", "Цена блюда");
             dataGridView.Columns.Add("Status", "Статус");
             dataGridView.Columns.Add("OrderSum", "Сумма заказа");
 
-            dataGridView.Columns[0].Visible = false;
+            dataGridView.Columns[0].Width = 60;
             dataGridView.Columns[1].Visible = false;
             dataGridView.Columns[2].Width = 200;
             dataGridView.Columns[3].Width = 150;
             dataGridView.Columns[4].Width = 150;
             dataGridView.Columns[5].Width = 100;
-            dataGridView.Columns[6].Width = 100;
+            dataGridView.Columns[6].Width = 70;
             dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
@@ -93,6 +93,7 @@ namespace CafeteriaBarnyardView
             if (dataGridView.SelectedRows.Count == 1)
             {
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                int idDish = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[4].Value);
                 try
                 {
                     logic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });

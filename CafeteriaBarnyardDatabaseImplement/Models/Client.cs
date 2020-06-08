@@ -13,6 +13,8 @@ namespace CafeteriaBarnyardDatabaseImplement.Models
 
         public string Password { get; set; }
 
+        public bool IsAdmin { get; set; }
+
         [ForeignKey("ClientId")]
         public virtual List<Order> Orders { get; set; }
     }
