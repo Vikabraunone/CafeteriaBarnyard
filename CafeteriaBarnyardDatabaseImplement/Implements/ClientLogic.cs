@@ -68,7 +68,25 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
             using (var context = new AbstractSweetShopDatabase())
             {
                 return context.Clients
-                .Where(rec => model == null || rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password) || model.Id == rec.Id)
+                .Where(rec => model == null || rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password)
+                || model.Id == rec.Id)
+                .Select(rec => new ClientViewModel
+                {
+                    Id = rec.Id,
+                    ClientFIO = rec.ClientFIO,
+                    Email = rec.Email,
+                    Password = rec.Password
+                })
+                .ToList();
+            }
+        }
+
+        public List<ClientViewModel> ReadAdmins()
+        {
+            using (var context = new AbstractSweetShopDatabase())
+            {
+                return context.Clients
+                .Where(rec => rec.IsAdmin)
                 .Select(rec => new ClientViewModel
                 {
                     Id = rec.Id,

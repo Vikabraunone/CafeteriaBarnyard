@@ -2,7 +2,6 @@
 using CafeteriaBarnyardBisinessLogic.Interfaces;
 using CafeteriaBarnyardBisinessLogic.ViewModels;
 using CafeteriaBarnyardDatabaseImplement.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +25,9 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
                         };
                         context.Requests.Add(request);
                         context.SaveChanges();
-                        Product product;
                         foreach (var rp in model.RequestProducts)
                         {
-                            product = context.Products.First(rec => rec.Id == rp.Key);
+                            Product product = context.Products.First(rec => rec.Id == rp.Key);
                             if (product.FillWeight <= rp.Value.Item2)
                             {
                                 transaction.Rollback();
@@ -61,20 +59,22 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
         {
             using (var context = new AbstractSweetShopDatabase())
             {
-                return context.Requests
-                    .Where(rec => model == null || rec.Id == model.Id)
+                var con = context.Requests
+                    .Where(rec => model == null || rec.Id == model.Id ||
+                    rec.DateRequest >= model.DateFrom && rec.DateRequest <= model.DateTo)
                     .ToList()
                     .Select(rec => new RequestViewModel
                     {
                         Id = rec.Id,
                         DateRequest = rec.DateRequest,
                         RequestProducts = context.RequestProducts
-                        .Include(recRP => recRP.ProductId)
                         .Where(recPR => recPR.RequestId == rec.Id)
                         .ToDictionary(recPR => recPR.ProductId, recPR =>
-                        (recPR.Product?.ProductName, recPR.Weight))
+                        (context.Products.First(recP => recP.Id == recPR.ProductId).ProductName,
+                        recPR.Weight))
                     })
                     .ToList();
+                return con;
             }
         }
     }

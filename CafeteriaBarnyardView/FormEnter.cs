@@ -25,12 +25,13 @@ namespace CafeteriaBarnyardView
             {
                 try
                 {
-                    Program.Client = logic.Read(new ClientBindingModel { Email = textBoxEmail.Text, Password = textBoxPassword.Text })?[0];
-                    if (Program.Client == null)
+                    var client = logic.Read(new ClientBindingModel { Email = textBoxEmail.Text, Password = textBoxPassword.Text });
+                    if (client.Count == 0)
                     {
                         MessageBox.Show("Неверный логин/пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                    Program.Client = client[0];
                     this.Visible = false;
                     var form = Container.Resolve<FormMain>();
                     form.ShowDialog();

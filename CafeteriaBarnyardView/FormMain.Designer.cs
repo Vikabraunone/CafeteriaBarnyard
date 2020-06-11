@@ -35,12 +35,13 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.заявкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пополнитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonDishes = new System.Windows.Forms.Button();
             this.buttonOrders = new System.Windows.Forms.Button();
             this.labelCRUD = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.пополнитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.поЗаявкамИЗаказамЗаПериодToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -111,10 +112,25 @@
             // 
             // отчетыToolStripMenuItem
             // 
+            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.поЗаявкамИЗаказамЗаПериодToolStripMenuItem});
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.отчетыToolStripMenuItem.Text = "Отчеты";
-            this.отчетыToolStripMenuItem.Click += new System.EventHandler(this.отчетыToolStripMenuItem_Click);
+            // 
+            // изменитьДанныеToolStripMenuItem
+            // 
+            this.изменитьДанныеToolStripMenuItem.Name = "изменитьДанныеToolStripMenuItem";
+            this.изменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.изменитьДанныеToolStripMenuItem.Text = "Изменить данные";
+            this.изменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.изменитьДанныеToolStripMenuItem_Click);
+            // 
+            // пополнитьToolStripMenuItem
+            // 
+            this.пополнитьToolStripMenuItem.Name = "пополнитьToolStripMenuItem";
+            this.пополнитьToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.пополнитьToolStripMenuItem.Text = "Пополнить";
+            this.пополнитьToolStripMenuItem.Click += new System.EventHandler(this.пополнитьToolStripMenuItem_Click);
             // 
             // buttonDishes
             // 
@@ -163,19 +179,12 @@
             this.dataGridView.Size = new System.Drawing.Size(470, 245);
             this.dataGridView.TabIndex = 0;
             // 
-            // изменитьДанныеToolStripMenuItem
+            // поЗаявкамИЗаказамЗаПериодToolStripMenuItem
             // 
-            this.изменитьДанныеToolStripMenuItem.Name = "изменитьДанныеToolStripMenuItem";
-            this.изменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
-            this.изменитьДанныеToolStripMenuItem.Text = "Изменить данные";
-            this.изменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.изменитьДанныеToolStripMenuItem_Click);
-            // 
-            // пополнитьToolStripMenuItem
-            // 
-            this.пополнитьToolStripMenuItem.Name = "пополнитьToolStripMenuItem";
-            this.пополнитьToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
-            this.пополнитьToolStripMenuItem.Text = "Пополнить";
-            this.пополнитьToolStripMenuItem.Click += new System.EventHandler(this.пополнитьToolStripMenuItem_Click);
+            this.поЗаявкамИЗаказамЗаПериодToolStripMenuItem.Name = "поЗаявкамИЗаказамЗаПериодToolStripMenuItem";
+            this.поЗаявкамИЗаказамЗаПериодToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.поЗаявкамИЗаказамЗаПериодToolStripMenuItem.Text = "По заявкам и заказам за период";
+            this.поЗаявкамИЗаказамЗаПериодToolStripMenuItem.Click += new System.EventHandler(this.поЗаявкамИЗаказамЗаПериодToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -218,5 +227,6 @@
         private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изменитьДанныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пополнитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem поЗаявкамИЗаказамЗаПериодToolStripMenuItem;
     }
 }

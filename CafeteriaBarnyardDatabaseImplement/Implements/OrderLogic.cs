@@ -64,7 +64,8 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
             using (var context = new AbstractSweetShopDatabase())
             {
                 return context.Orders
-                    .Where(rec => model == null || rec.Id == model.Id)
+                    .Where(rec => model == null || rec.Id == model.Id ||
+                     rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
                     .ToList()
                     .Select(rec => new OrderViewModel
                     {

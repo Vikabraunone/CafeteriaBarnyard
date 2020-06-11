@@ -20,29 +20,38 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
 
         public void CreateOrder(CreateOrderBindingModel model)
         {
-            Random rnd = new Random();
-            var dishes = dishLogic.Read(null);
-            var firstDishes = dishes.Where(x => x.DishType == DishType.Первое).ToList();
-            var secondDishes = dishes.Where(x => x.DishType == DishType.Второе).ToList();
-            var desserts = dishes.Where(x => x.DishType == DishType.Десерт).ToList();
-            var drinks = dishes.Where(x => x.DishType == DishType.Напиток).ToList();
-            int indexFD = rnd.Next(0, firstDishes.Count());
-            int indexSD = rnd.Next(0, secondDishes.Count());
-            int indexDessert = rnd.Next(0, desserts.Count());
-            int indexDrink = rnd.Next(0, drinks.Count());
-            orderLogic.CreateOrUpdate(new OrderBindingModel
+            try
             {
-                ClientId = model.ClientId,
-                OrderDishes = new Dictionary<int, (string, decimal)> {
-                    { 0, (firstDishes[indexFD].DishName, firstDishes[indexFD].Price)},
-                    { 1, (secondDishes[indexSD].DishName, secondDishes[indexSD].Price)},
-                    { 2, (desserts[indexDessert].DishName, desserts[indexDessert].Price)},
-                    { 3, (drinks[indexDrink].DishName, drinks[indexDrink].Price)},
+                Random rnd = new Random();
+                var dishes = dishLogic.Read(null);
+                var firstDishes = dishes.Where(x => x.DishType == DishType.Первое).ToList();
+                var secondDishes = dishes.Where(x => x.DishType == DishType.Второе).ToList();
+                var desserts = dishes.Where(x => x.DishType == DishType.Десерт).ToList();
+                var drinks = dishes.Where(x => x.DishType == DishType.Напиток).ToList();
+                if (firstDishes.Count() == 0 || secondDishes.Count() == 0 || desserts.Count() == 0 || drinks.Count() == 0)
+                    throw new Exception("Отсутствуют 4 разных вида блюд");
+                int indexFD = rnd.Next(0, firstDishes.Count());
+                int indexSD = rnd.Next(0, secondDishes.Count());
+                int indexDessert = rnd.Next(0, desserts.Count());
+                int indexDrink = rnd.Next(0, drinks.Count());
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    ClientId = model.ClientId,
+                    OrderDishes = new Dictionary<int, (string, decimal)> {
+                    { firstDishes[indexFD].Id.Value, (firstDishes[indexFD].DishName, firstDishes[indexFD].Price)},
+                    { secondDishes[indexSD].Id.Value, (secondDishes[indexSD].DishName, secondDishes[indexSD].Price)},
+                    { desserts[indexDessert].Id.Value, (desserts[indexDessert].DishName, desserts[indexDessert].Price)},
+                    { drinks[indexDrink].Id.Value, (drinks[indexDrink].DishName, drinks[indexDrink].Price)},
                 },
-                DateCreate = DateTime.Now,
-                OrderSum = firstDishes[indexFD].Price + secondDishes[indexSD].Price + desserts[indexDessert].Price + drinks[indexDrink].Price,
-                Status = OrderStatus.Принят
-            });
+                    DateCreate = DateTime.Now,
+                    OrderSum = firstDishes[indexFD].Price + secondDishes[indexSD].Price + desserts[indexDessert].Price + drinks[indexDrink].Price,
+                    Status = OrderStatus.Принят
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)

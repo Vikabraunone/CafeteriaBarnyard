@@ -1,4 +1,5 @@
 ﻿using CafeteriaBarnyardBisinessLogic.BindingModels;
+using CafeteriaBarnyardBisinessLogic.BusinessLogics;
 using CafeteriaBarnyardBisinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,17 @@ namespace CafeteriaBarnyardView
 
         private readonly IRequestLogic requestLogic;
 
+        private readonly ReportLogic reportLogic;
+
         private int? id;
 
         private Dictionary<int, (string, double)> requestProducts;
 
-        public FormRequests(IRequestLogic requestLogic)
+        public FormRequests(IRequestLogic requestLogic, ReportLogic reportLogic)
         {
             InitializeComponent();
             this.requestLogic = requestLogic;
+            this.reportLogic = reportLogic;
             dataGridView.Columns.Add("Id", "Id");
             dataGridView.Columns.Add("DishName", "Название продукта");
             dataGridView.Columns.Add("ProductName", "Количество/вес");
@@ -129,7 +133,31 @@ namespace CafeteriaBarnyardView
                 }
                 else
                 {
-                    //
+                    var form = Container.Resolve<FormInfoMail>();
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        if (form.IsWord)
+                        {
+                            reportLogic.SendRequestToWord(new ReportRequestBindingModel
+                            {
+                                ClientId = Program.Client.Id.Value,
+                                AdminId = form.AdminId,
+                                Request = requestProducts
+                            });
+                        }
+                        else
+                        {
+                            reportLogic.SendRequestToExcelFile(new ReportRequestBindingModel
+                            {
+                                ClientId = Program.Client.Id.Value,
+                                AdminId = form.AdminId,
+                                Request = requestProducts
+                            });
+                        }
+                        MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
                 }
             }
             catch (Exception ex)

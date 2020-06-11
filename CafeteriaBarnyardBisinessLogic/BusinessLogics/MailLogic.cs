@@ -1,5 +1,10 @@
-﻿using System;
+﻿using CafeteriaBarnyardBisinessLogic.HelperModels;
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
 {
@@ -21,7 +26,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
             mailPassword = config.MailPassword;
         }
 
-        public static async void MailSendAsync(MailSendInfo info)
+        public static async void MailSendAsync(MailSendInfo info, string fileName)
         {
             if (string.IsNullOrEmpty(smtpClientHost) || smtpClientPort == 0)
             {
@@ -47,6 +52,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                         objMailMessage.Body = info.Text;
                         objMailMessage.SubjectEncoding = Encoding.UTF8;
                         objMailMessage.BodyEncoding = Encoding.UTF8;
+                        objMailMessage.Attachments.Add(new Attachment(fileName));
 
                         objSmtpClient.UseDefaultCredentials = false;
                         objSmtpClient.EnableSsl = true;
@@ -60,6 +66,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                     }
                 }
             }
+            File.Delete(fileName);
         }
     }
 }

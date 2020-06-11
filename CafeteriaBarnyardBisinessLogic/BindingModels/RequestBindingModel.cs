@@ -16,5 +16,9 @@ namespace CafeteriaBarnyardBisinessLogic.BindingModels
 
         // Продукт, название, вес
         public Dictionary<int, (string, double)> RequestProducts { get; set; }
+
+        public DateTime? DateFrom { get; set; }
+
+        public DateTime? DateTo { get; set; }
     }
 }

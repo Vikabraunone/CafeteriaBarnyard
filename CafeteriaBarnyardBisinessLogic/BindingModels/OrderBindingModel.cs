@@ -21,5 +21,9 @@ namespace CafeteriaBarnyardBisinessLogic.BindingModels
 
         // Id блюда, название, сумма
         public Dictionary<int, (string, decimal)> OrderDishes { get; set; }
+
+        public DateTime? DateFrom { get; set; }
+
+        public DateTime? DateTo { get; set; }
     }
 }

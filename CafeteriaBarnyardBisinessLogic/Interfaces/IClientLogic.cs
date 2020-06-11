@@ -13,5 +13,7 @@ namespace CafeteriaBarnyardBisinessLogic.Interfaces
         void Delete(ClientBindingModel model);
 
         bool IsAdmin(ClientBindingModel model);
+
+        List<ClientViewModel> ReadAdmins();
     }
 }

@@ -37,7 +37,22 @@ namespace CafeteriaBarnyardView
             {
                 try
                 {
-                    logic.CreateOrUpdate(new ClientBindingModel { Email = textBoxEmail.Text, Password = textBoxPassword.Text, ClientFIO = textBoxClientFIO.Text });
+                    if (Program.Client.Id == null)
+                        logic.CreateOrUpdate(new ClientBindingModel
+                        {
+                            Email = textBoxEmail.Text,
+                            Password = textBoxPassword.Text,
+                            ClientFIO = textBoxClientFIO.Text,
+                        });
+                    else
+                        logic.CreateOrUpdate(new ClientBindingModel
+                        {
+                            Email = textBoxEmail.Text,
+                            Password = textBoxPassword.Text,
+                            ClientFIO = textBoxClientFIO.Text,
+                            Id = Program.Client.Id,
+                            IsAdmin = Program.Client.IsAdmin
+                        });
                     MessageBox.Show("Регистрация прошла успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }

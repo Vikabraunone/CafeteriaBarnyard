@@ -108,15 +108,10 @@ namespace CafeteriaBarnyardView
 
         private void заявкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormAddProduct>();
+            var form = Container.Resolve<FormRequests>();
             if (form.ShowDialog() == DialogResult.OK)
             {
             }
-        }
-
-        private void отчетыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void пополнитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,6 +124,12 @@ namespace CafeteriaBarnyardView
         private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormRegister>();
+            form.ShowDialog();
+        }
+
+        private void поЗаявкамИЗаказамЗаПериодToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportPeriod>();
             form.ShowDialog();
         }
     }

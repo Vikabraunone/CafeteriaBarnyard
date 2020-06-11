@@ -13,14 +13,14 @@ namespace CafeteriaBarnyardView
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly OrderLogic logic;
+        private readonly HelpOrderLogic helpOrderlogic;
 
         private readonly IOrderLogic orderLogic;
 
-        public FormOrders(OrderLogic logic, IOrderLogic orderLogic)
+        public FormOrders(HelpOrderLogic helpOrderlogic, IOrderLogic orderLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.helpOrderlogic = helpOrderlogic;
             this.orderLogic = orderLogic;
             dataGridView.Columns.Add("Id", "№ заказа");
             dataGridView.Columns.Add("ClientId", "Id клиента");
@@ -79,7 +79,7 @@ namespace CafeteriaBarnyardView
         {
             try
             {
-                logic.CreateOrder(new CreateOrderBindingModel { ClientId = Program.Client.Id });
+                helpOrderlogic.CreateOrder(new CreateOrderBindingModel { ClientId = Program.Client.Id });
                 LoadData();
             }
             catch (Exception ex)
@@ -96,7 +96,7 @@ namespace CafeteriaBarnyardView
                 int idDish = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[4].Value);
                 try
                 {
-                    logic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
+                    helpOrderlogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -113,7 +113,7 @@ namespace CafeteriaBarnyardView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
+                    helpOrderlogic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -130,7 +130,7 @@ namespace CafeteriaBarnyardView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
+                    helpOrderlogic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
