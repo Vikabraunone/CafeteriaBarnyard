@@ -55,7 +55,7 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
         {
             using (var context = new AbstractSweetShopDatabase())
             {
-                var list = context.Products
+                return context.Products
                  .Where(rec => model == null || rec.Id == model.Id || rec.ProductName.Equals(model.ProductName))
                  .Select(rec => new ProductViewModel
                  {
@@ -65,7 +65,6 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
                      Price = rec.Price
                  })
                  .ToList();
-                return list;
             }
         }
     }

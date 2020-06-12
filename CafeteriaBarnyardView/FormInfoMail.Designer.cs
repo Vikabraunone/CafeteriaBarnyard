@@ -97,7 +97,6 @@
             this.Text = "Отправить заявку на почту";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

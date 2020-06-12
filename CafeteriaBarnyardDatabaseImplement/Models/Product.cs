@@ -19,7 +19,7 @@ namespace CafeteriaBarnyardDatabaseImplement.Models
         [ForeignKey("ProductId")]
         public virtual List<DishProduct> DishProducts { get; set; }
 
-        [ForeignKey("RequestId")]
+        [ForeignKey("ProductId")]
         public virtual List<RequestProduct> RequestProducts { get; set; }
     }
 }

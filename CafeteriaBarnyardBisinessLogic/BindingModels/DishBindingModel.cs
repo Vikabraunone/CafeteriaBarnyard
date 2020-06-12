@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace CafeteriaBarnyardBisinessLogic.BindingModels
 {
+    /// <summary>
+    /// Блюдо
+    /// </summary>
     public class DishBindingModel
     {
         public int? Id { get; set; }

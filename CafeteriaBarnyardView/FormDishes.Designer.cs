@@ -80,7 +80,7 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // dataGridView
+            // dataGridViewProducts
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
@@ -89,7 +89,7 @@
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Name = "dataGridViewProducts";
             this.dataGridView.Size = new System.Drawing.Size(400, 289);
             this.dataGridView.TabIndex = 5;
             // 

@@ -7,7 +7,6 @@ using Unity;
 
 namespace CafeteriaBarnyardView
 {
-    // переделать
     public partial class FormOrders : Form
     {
         [Dependency]
@@ -22,6 +21,7 @@ namespace CafeteriaBarnyardView
             InitializeComponent();
             this.helpOrderlogic = helpOrderlogic;
             this.orderLogic = orderLogic;
+
             dataGridView.Columns.Add("Id", "№ заказа");
             dataGridView.Columns.Add("ClientId", "Id клиента");
             dataGridView.Columns.Add("ClientFIO", "Сотрудник");
@@ -46,6 +46,11 @@ namespace CafeteriaBarnyardView
             LoadData();
         }
 
+        /// <summary>
+        /// Обновить список заказов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadData()
         {
             try
@@ -71,7 +76,7 @@ namespace CafeteriaBarnyardView
         }
 
         /// <summary>
-        /// 
+        /// Создать заказ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -88,14 +93,18 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// Отдать заказ в работу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonTakeOrderInWork_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                int idDish = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[4].Value);
                 try
                 {
+                    int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     helpOrderlogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
@@ -106,6 +115,11 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// Сменить статус заказа на Готов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonOrderReady_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -123,6 +137,11 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// Сменить статус заказа на Оплачен
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -140,6 +159,11 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// Обновить список с заказами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonOrderRef_Click(object sender, EventArgs e)
         {
             LoadData();

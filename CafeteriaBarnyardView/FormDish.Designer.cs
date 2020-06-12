@@ -131,7 +131,7 @@
             this.labelResProductsPrice.TabIndex = 10;
             this.labelResProductsPrice.Text = "Себестоимость:";
             // 
-            // dataGridView
+            // dataGridViewProducts
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
@@ -139,7 +139,7 @@
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(12, 26);
-            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Name = "dataGridViewProducts";
             this.dataGridView.Size = new System.Drawing.Size(430, 226);
             this.dataGridView.TabIndex = 9;
             // 
@@ -230,7 +230,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

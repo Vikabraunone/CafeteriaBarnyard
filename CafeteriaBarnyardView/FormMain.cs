@@ -19,13 +19,12 @@ namespace CafeteriaBarnyardView
             this.productLogic = productLogic;
             if (!clientLogic.IsAdmin(new ClientBindingModel { Id = Program.Client.Id }))
                 пополнитьToolStripMenuItem.Visible = false;
-        }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
             LoadData();
         }
 
+        /// <summary>
+        /// Загрузить список продуктов
+        /// </summary>
         private void LoadData()
         {
             try
@@ -46,18 +45,33 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// Вызвать форму с блюдами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDishes_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormDishes>();
             form.ShowDialog();
         }
 
+        /// <summary>
+        /// Вызвать форму с заказами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonOrders_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormOrders>();
             form.ShowDialog();
         }
 
+        /// <summary>
+        /// Создать продукт
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormProduct>();
@@ -65,6 +79,11 @@ namespace CafeteriaBarnyardView
                 LoadData();
         }
 
+        /// <summary>
+        /// Изменить продукт
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -78,11 +97,21 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Выберите строку с продуктом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Обновить список с продуктами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
         }
 
+        /// <summary>
+        /// Удалить продукт
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -108,10 +137,9 @@ namespace CafeteriaBarnyardView
 
         private void заявкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormRequests>();
+            var form = Container.Resolve<FormRequest>();
             if (form.ShowDialog() == DialogResult.OK)
-            {
-            }
+                LoadData();
         }
 
         private void пополнитьToolStripMenuItem_Click(object sender, EventArgs e)

@@ -9,6 +9,7 @@ namespace CafeteriaBarnyardBisinessLogic.HelperModels
 
         public string Title { get; set; }
 
+        // Список продуктов в заявке
         public List<ReportRequestViewModel> Request { get; set; }
     }
 }

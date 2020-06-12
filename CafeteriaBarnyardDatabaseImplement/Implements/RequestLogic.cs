@@ -25,9 +25,10 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
                         };
                         context.Requests.Add(request);
                         context.SaveChanges();
+                        Product product;
                         foreach (var rp in model.RequestProducts)
                         {
-                            Product product = context.Products.First(rec => rec.Id == rp.Key);
+                            product = context.Products.First(rec => rec.Id == rp.Key);
                             if (product.FillWeight <= rp.Value.Item2)
                             {
                                 transaction.Rollback();
@@ -59,7 +60,7 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
         {
             using (var context = new AbstractSweetShopDatabase())
             {
-                var con = context.Requests
+                return context.Requests
                     .Where(rec => model == null || rec.Id == model.Id ||
                     rec.DateRequest >= model.DateFrom && rec.DateRequest <= model.DateTo)
                     .ToList()
@@ -74,7 +75,6 @@ namespace CafeteriaBarnyardDatabaseImplement.Implements
                         recPR.Weight))
                     })
                     .ToList();
-                return con;
             }
         }
     }

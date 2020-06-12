@@ -1,5 +1,4 @@
-﻿using CafeteriaBarnyardBisinessLogic.BindingModels;
-using CafeteriaBarnyardBisinessLogic.Interfaces;
+﻿using CafeteriaBarnyardBisinessLogic.Interfaces;
 using CafeteriaBarnyardBisinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,17 +7,31 @@ using Unity;
 
 namespace CafeteriaBarnyardView
 {
-    public partial class FormAddProduct : Form
+    /// <summary>
+    /// Продукт в заявке
+    /// </summary>
+    public partial class FormProductRequest : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly IProductLogic logic;
+        public int Id
+        {
+            get { return Convert.ToInt32(comboBoxProduct.SelectedValue); }
+            set { comboBoxProduct.SelectedValue = value; }
+        }
 
-        public FormAddProduct(IProductLogic logic)
+        public string NameProduct { get { return comboBoxProduct.Text; } }
+
+        public double Weight
+        {
+            get { return Convert.ToDouble(textBoxWeight.Text); }
+            set { textBoxWeight.Text = value.ToString(); }
+        }
+
+        public FormProductRequest(IProductLogic logic)
         {
             InitializeComponent();
-            this.logic = logic;
             List<ProductViewModel> list = logic.Read(null);
             if (list != null)
             {
@@ -36,25 +49,16 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Выберите продукт", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (string.IsNullOrEmpty(textBoxCount.Text))
+            if (string.IsNullOrEmpty(textBoxWeight.Text))
             {
                 MessageBox.Show("Заполните поле количество", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!double.TryParse(textBoxCount.Text, out double res))
+            if (!double.TryParse(textBoxWeight.Text, out double res))
             {
-                MessageBox.Show("Неверный формат числа", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Неверный формат данных", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var product = (ProductViewModel)comboBoxProduct.SelectedItem;
-            logic.CreateOrUpdate(new ProductBindingModel
-            {
-                Id = product.Id,
-                FillWeight = product.FillWeight.HasValue ? product.FillWeight + res : res,
-                Price = product.Price,
-                ProductName = product.ProductName
-            });
-            MessageBox.Show("Склад пополнен успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
             Close();
         }

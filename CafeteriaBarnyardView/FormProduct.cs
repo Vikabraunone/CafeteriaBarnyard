@@ -17,7 +17,6 @@ namespace CafeteriaBarnyardView
 
         private int? id;
 
-
         public FormProduct(IProductLogic logic)
         {
             InitializeComponent();

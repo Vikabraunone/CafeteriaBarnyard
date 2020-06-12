@@ -129,7 +129,6 @@
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion

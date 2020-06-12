@@ -279,17 +279,17 @@
     <Compile Include="FormReportPeriod.Designer.cs">
       <DependentUpon>FormReportPeriod.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormProductRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProductRequest.Designer.cs">
+      <DependentUpon>FormProductRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormRequest.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormRequest.Designer.cs">
       <DependentUpon>FormRequest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormRequests.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormRequests.Designer.cs">
-      <DependentUpon>FormRequests.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -327,11 +327,11 @@
     <EmbeddedResource Include="FormReportPeriod.resx">
       <DependentUpon>FormReportPeriod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormProductRequest.resx">
+      <DependentUpon>FormProductRequest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormRequest.resx">
       <DependentUpon>FormRequest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormRequests.resx">
-      <DependentUpon>FormRequests.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

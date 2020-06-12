@@ -4,14 +4,16 @@ using CafeteriaBarnyardDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CafeteriaBarnyardDatabaseImplement.Migrations
 {
     [DbContext(typeof(AbstractSweetShopDatabase))]
-    partial class AbstractSweetShopDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20200612111443_editForeignKeyProduct")]
+    partial class editForeignKeyProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

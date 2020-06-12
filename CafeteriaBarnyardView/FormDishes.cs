@@ -6,17 +6,20 @@ using Unity;
 
 namespace CafeteriaBarnyardView
 {
+    /// <summary>
+    /// Блюда
+    /// </summary>
     public partial class FormDishes : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly IDishLogic logic;
+        private readonly IDishLogic dishLogic;
 
-        public FormDishes(IDishLogic logic)
+        public FormDishes(IDishLogic dishLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.dishLogic = dishLogic;
         }
 
         private void FormDishes_Load(object sender, EventArgs e)
@@ -24,11 +27,14 @@ namespace CafeteriaBarnyardView
             LoadData();
         }
 
+        /// <summary>
+        /// Загрузить список блюд
+        /// </summary>
         private void LoadData()
         {
             try
             {
-                var list = logic.Read(null);
+                var list = dishLogic.Read(null);
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -45,6 +51,11 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// Добавить блюдо
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormDish>();
@@ -52,6 +63,11 @@ namespace CafeteriaBarnyardView
                 LoadData();
         }
 
+        /// <summary>
+        /// Изменить блюдо
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -65,6 +81,11 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Выберите строку с блюдом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Удалить блюдо
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -75,7 +96,7 @@ namespace CafeteriaBarnyardView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new DishBindingModel { Id = id });
+                        dishLogic.Delete(new DishBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -88,6 +109,11 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Выберите строку с блюдом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Обновить список блюд
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();

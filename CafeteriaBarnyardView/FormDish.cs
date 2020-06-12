@@ -11,6 +11,9 @@ using Unity;
 
 namespace CafeteriaBarnyardView
 {
+    /// <summary>
+    /// Блюдо
+    /// </summary>
     public partial class FormDish : Form
     {
         [Dependency]
@@ -18,19 +21,19 @@ namespace CafeteriaBarnyardView
 
         public int Id { set { id = value; } }
 
-        private readonly IDishLogic dLogic;
+        private readonly IDishLogic dishLogic;
 
-        private readonly IProductLogic pLogic;
+        private readonly IProductLogic productLogic;
 
         private int? id;
 
         private Dictionary<int, (string, double)> dishProducts;
 
-        public FormDish(IDishLogic dLogic, IProductLogic pLogic)
+        public FormDish(IDishLogic dishLogic, IProductLogic productLogic)
         {
             InitializeComponent();
-            this.dLogic = dLogic;
-            this.pLogic = pLogic;
+            this.dishLogic = dishLogic;
+            this.productLogic = productLogic;
             dataGridView.Columns.Add("Id", "Id");
             dataGridView.Columns.Add("DishName", "Название продукта");
             dataGridView.Columns.Add("ProductName", "Количество");
@@ -49,7 +52,7 @@ namespace CafeteriaBarnyardView
             {
                 try
                 {
-                    DishViewModel view = dLogic.Read(new DishBindingModel { Id = id.Value })?[0];
+                    DishViewModel view = dishLogic.Read(new DishBindingModel { Id = id.Value })?[0];
                     if (view != null)
                     {
                         textBoxName.Text = view.DishName;
@@ -71,14 +74,9 @@ namespace CafeteriaBarnyardView
             }
         }
 
-        private void CalcSum()
-        {
-            double price = 0;
-            foreach (var e in dishProducts)
-                price += Convert.ToDouble(pLogic.Read(new ProductBindingModel { ProductName = e.Value.Item1 })[0].Price) * e.Value.Item2;
-            textBoxResult.Text = price.ToString();
-        }
-
+        /// <summary>
+        /// Загрузить записи продуктов в блюде
+        /// </summary>
         private void LoadData()
         {
             try
@@ -97,6 +95,22 @@ namespace CafeteriaBarnyardView
             }
         }
 
+        /// <summary>
+        /// Посчитать себестоимость продуктов в блюде
+        /// </summary>
+        private void CalcSum()
+        {
+            double price = 0;
+            foreach (var e in dishProducts)
+                price += Convert.ToDouble(productLogic.Read(new ProductBindingModel { ProductName = e.Value.Item1 })[0].Price) * e.Value.Item2;
+            textBoxResult.Text = price.ToString();
+        }
+
+        /// <summary>
+        /// Добавить продукт в блюдо
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormDishProducts>();
@@ -112,6 +126,11 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Выберите строку с продуктом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Изменить запись о продукте в блюде
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -130,6 +149,11 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Выберите строку с продуктом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Удалить продукт из блюда
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -152,6 +176,11 @@ namespace CafeteriaBarnyardView
                 MessageBox.Show("Выберите строку с продуктом", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Обновить список с продуктами в блюде
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
@@ -182,7 +211,7 @@ namespace CafeteriaBarnyardView
             }
             try
             {
-                dLogic.CreateOrUpdate(new DishBindingModel
+                dishLogic.CreateOrUpdate(new DishBindingModel
                 {
                     Id = id,
                     DishName = textBoxName.Text,

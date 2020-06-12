@@ -2,6 +2,9 @@
 
 namespace CafeteriaBarnyardBisinessLogic.BindingModels
 {
+    /// <summary>
+    /// Отчет за период 
+    /// </summary>
     public class ReportPeriodBindingModel
     {
         public string FileName { get; set; }

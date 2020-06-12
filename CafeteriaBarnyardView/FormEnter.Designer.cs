@@ -104,7 +104,6 @@
             this.Text = "Вход";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
