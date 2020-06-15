@@ -30,6 +30,6 @@ namespace CafeteriaBarnyardDatabaseImplement
 
         public virtual DbSet<OrderDish> OrderDishes { set; get; }
 
-        public virtual DbSet<AddProduct> AddProducts { set; get; }
+        public virtual DbSet<ProductAdding> AddProducts { set; get; }
     }
 }

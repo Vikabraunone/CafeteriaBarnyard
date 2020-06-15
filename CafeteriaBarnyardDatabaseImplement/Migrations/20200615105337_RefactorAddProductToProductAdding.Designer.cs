@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CafeteriaBarnyardDatabaseImplement.Migrations
 {
     [DbContext(typeof(AbstractSweetShopDatabase))]
-    [Migration("20200530102303_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200615105337_RefactorAddProductToProductAdding")]
+    partial class RefactorAddProductToProductAdding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,27 +20,6 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.ProductAdding", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateAdding")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Weight")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AddProducts");
-                });
 
             modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.Client", b =>
                 {
@@ -54,6 +33,9 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -186,6 +168,27 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.ProductAdding", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdding")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AddProducts");
+                });
+
             modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.Request", b =>
                 {
                     b.Property<int?>("Id")
@@ -242,17 +245,11 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CafeteriaBarnyardDatabaseImplement.Models.Request", null)
-                        .WithMany("DishProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.Order", b =>
                 {
-                    b.HasOne("CafeteriaBarnyardDatabaseImplement.Models.Client", null)
+                    b.HasOne("CafeteriaBarnyardDatabaseImplement.Models.Client", "Client")
                         .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -277,13 +274,13 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
             modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.RequestProduct", b =>
                 {
                     b.HasOne("CafeteriaBarnyardDatabaseImplement.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("RequestProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CafeteriaBarnyardDatabaseImplement.Models.Request", "Request")
-                        .WithMany()
+                        .WithMany("RequestProducts")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

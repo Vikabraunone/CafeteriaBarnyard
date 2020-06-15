@@ -21,7 +21,7 @@ namespace CafeteriaBarnyardDatabaseImplement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.AddProduct", b =>
+            modelBuilder.Entity("CafeteriaBarnyardDatabaseImplement.Models.ProductAdding", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()

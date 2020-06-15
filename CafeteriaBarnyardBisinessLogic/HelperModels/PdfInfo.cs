@@ -15,6 +15,6 @@ namespace CafeteriaBarnyardBisinessLogic.HelperModels
         public DateTime DateTo { get; set; }
 
         // Заявки и заказы с расшифровкой по продуктам
-        public List<ReportRequestOrderProductsViewModel> RequestsAndOrders { get; set; }
+        public List<ReportRequestAndOrderProductsViewModel> RequestsAndOrders { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace CafeteriaBarnyardView
             {
                 try
                 {
-                    if (Program.Client.Id == null)
+                    if (Program.Client == null)
                         logic.CreateOrUpdate(new ClientBindingModel
                         {
                             Email = textBoxEmail.Text,

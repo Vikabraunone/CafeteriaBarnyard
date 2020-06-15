@@ -108,9 +108,9 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
         /// Получение списка заявок и заказов с расшифровкой по продуктам
         /// </summary>
         /// <returns></returns>
-        public List<ReportRequestOrderProductsViewModel> GetRequestOrderProducts(ReportPeriodBindingModel model)
+        public List<ReportRequestAndOrderProductsViewModel> GetRequestOrderProducts(ReportPeriodBindingModel model)
         {
-            var reportList = new List<ReportRequestOrderProductsViewModel>();
+            var reportList = new List<ReportRequestAndOrderProductsViewModel>();
             var requests = requestLogic.Read(new RequestBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo });
             var orders = orderLogic.Read(new OrderBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo });
             int ri = 0;
@@ -121,7 +121,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                 {
                     foreach (var product in requests[ri].RequestProducts)
                     {
-                        reportList.Add(new ReportRequestOrderProductsViewModel
+                        reportList.Add(new ReportRequestAndOrderProductsViewModel
                         {
                             Id = requests[ri].Id.Value,
                             DateCreate = requests[ri].DateRequest,
@@ -138,7 +138,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                     {
                         var currentDish = dishLogic.Read(new DishBindingModel { Id = dish.Key })[0];
                         foreach (var product in currentDish.DishProducts)
-                            reportList.Add(new ReportRequestOrderProductsViewModel
+                            reportList.Add(new ReportRequestAndOrderProductsViewModel
                             {
                                 Id = null,
                                 DateCreate = orders[oi].DateCreate,
@@ -154,7 +154,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
             {
                 foreach (var product in requests[ri].RequestProducts)
                 {
-                    reportList.Add(new ReportRequestOrderProductsViewModel
+                    reportList.Add(new ReportRequestAndOrderProductsViewModel
                     {
                         Id = requests[ri].Id.Value,
                         DateCreate = requests[ri].DateRequest,
@@ -171,7 +171,7 @@ namespace CafeteriaBarnyardBisinessLogic.BusinessLogics
                 {
                     var currentDish = dishLogic.Read(new DishBindingModel { Id = dish.Key })[0];
                     foreach (var product in currentDish.DishProducts)
-                        reportList.Add(new ReportRequestOrderProductsViewModel
+                        reportList.Add(new ReportRequestAndOrderProductsViewModel
                         {
                             Id = null,
                             DateCreate = orders[oi].DateCreate,
